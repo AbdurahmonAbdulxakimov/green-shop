@@ -26,12 +26,13 @@ TIME_ZONE = "Asia/Tashkent"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = "en-us"
 # https://docs.djangoproject.com/en/dev/ref/settings/#languages
-# from django.utils.translation import gettext_lazy as _
-# LANGUAGES = [
-#     ('en', _('English')),
-#     ('fr-fr', _('French')),
-#     ('pt-br', _('Portuguese')),
-# ]
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGES = [
+    ("uz", _("Uzbek")),
+    ("en", _("English")),
+    ("ru", _("Russian")),
+]
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
@@ -67,6 +68,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
     # "django.contrib.admin",
+    "modeltranslation",
     "config.apps.MyAdminConfig",
     "django.forms",
 ]
@@ -81,10 +83,12 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
+    "ckeditor",
 ]
 
 LOCAL_APPS = [
     "users",
+    "products",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -327,10 +331,25 @@ CORS_URLS_REGEX = r"^/api/.*$"
 # By Default swagger ui is available only to admin user(s). You can change permission classes to change that
 # See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
 SPECTACULAR_SETTINGS = {
-    "TITLE": "My Awesome Project API",
-    "DESCRIPTION": "Documentation of API endpoints of My Awesome Project",
+    "TITLE": "Green Shop Project API",
+    "DESCRIPTION": "Documentation of API endpoints of Green Shop Project",
     "VERSION": "1.0.0",
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+CKEDITOR_BASEPATH = f"{STATIC_URL}ckeditor/ckeditor/"
+
+MODELTRANSLATION_LANGUAGES = ("uz", "ru", "en")
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = "uz"
+
+# MODELTRANSLATION_PREPOPULATE_LANGUAGE = "uz"
+
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "Basic",
+        "height": 300,
+        "width": 800,
+    },
+}
