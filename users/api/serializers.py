@@ -9,8 +9,29 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer[UserType]):
     class Meta:
         model = User
-        fields = ["username", "name", "url"]
+        fields = (
+            "id",
+            "email",
+            "first_name",
+            "last_name",
+            "phone_number",
+        )
 
-        extra_kwargs = {
-            "url": {"view_name": "api:user-detail", "lookup_field": "username"},
-        }
+
+class UserCreateSerializer(serializers.ModelSerializer[UserType]):
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "email",
+            "first_name",
+            "last_name",
+            "phone_number",
+            "password",
+        )
+
+        def create(self, validated_data):
+            user = super().create(validated_data)
+            user.set_password(validated_data["password"])
+            user.save()
+            return user

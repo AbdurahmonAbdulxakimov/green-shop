@@ -1,10 +1,16 @@
 from django.urls import path
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
-from users.views import user_detail_view, user_redirect_view, user_update_view
+from users.api.views import UserRetrieveUpdateView, UserCreateView
 
 app_name = "users"
+
 urlpatterns = [
-    path("~redirect/", view=user_redirect_view, name="redirect"),
-    path("~update/", view=user_update_view, name="update"),
-    path("<str:username>/", view=user_detail_view, name="detail"),
+    path("signup/", UserCreateView.as_view(), name="signup"),
+    path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("me/", UserRetrieveUpdateView.as_view(), name="me"),
 ]

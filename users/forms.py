@@ -3,6 +3,7 @@ from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from django.contrib.auth import forms as admin_forms
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from django.forms import EmailField
 
 User = get_user_model()
 
@@ -20,8 +21,15 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
 
     class Meta(admin_forms.UserCreationForm.Meta):
         model = User
+        fields = (
+            "email",
+            "first_name",
+            "last_name",
+            "phone_number",
+        )
+        field_classes = {"email": EmailField}
         error_messages = {
-            "username": {"unique": _("This username has already been taken.")},
+            "email": {"unique": _("This email has already been taken.")},
         }
 
 
