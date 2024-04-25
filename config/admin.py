@@ -29,10 +29,9 @@ class MyAdminSite(admin.AdminSite):
         # app_list = sorted(app_dict.values(), key=lambda x: ordering.get(x["name"], 10))
 
         # Sort the apps depending reversed on INSTALLED_APPS order.
-        auth = app_dict.pop("auth")
-        allauth_accounts = app_dict.pop("account", None)
-        allauth_socials = app_dict.pop("socialaccount")
-        authtoken = app_dict.pop("authtoken")
+        # allauth_accounts = app_dict.pop("account", None)
+        # allauth_socials = app_dict.pop("socialaccount", None)
+        # authtoken = app_dict.pop("authtoken", None)
 
         app_list = list(app_dict.values())[::-1]
 

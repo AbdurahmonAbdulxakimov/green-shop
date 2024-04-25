@@ -36,6 +36,13 @@ class ProductImageAdmin(admin.ModelAdmin):
 
 class ImageInline(admin.StackedInline):
     model = ProductImage
+    extra = 1
+
+
+@admin.register(ProductOptionValue)
+class ProductOptionValueAdmin(admin.ModelAdmin):
+    list_display = ("id", "product", "option")
+    list_display_links = ("id", "product")
 
 
 @admin.register(Product)
@@ -44,9 +51,3 @@ class ProductAdmin(TranslationAdmin):
     list_display_links = ("id", "title")
 
     inlines = (ImageInline,)
-
-
-@admin.register(ProductOptionValue)
-class ProductOptionValueAdmin(admin.ModelAdmin):
-    list_display = ("id", "product", "option")
-    list_display_links = ("id", "product")

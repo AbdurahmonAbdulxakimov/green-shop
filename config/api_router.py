@@ -4,4 +4,7 @@ from rest_framework.routers import DefaultRouter, SimpleRouter
 
 
 app_name = "api"
-urlpatterns = (path("users/", include("users.urls", namespace="users")),)
+urlpatterns = (
+    path("users/", include("users.urls", namespace="users")),
+    path("products/", include("products.urls", namespace="products")),
+)
